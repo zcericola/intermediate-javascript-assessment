@@ -42,8 +42,18 @@ function noWeakLink() {
   return $http({
     method: 'GET',
     url: '/api/users'
+  }).then((res) => {
+   
+    firstUser = res.data[0];
+     
+    return res; 
+  }).then( (res) => {
+   
+    thirdUser = res.data[2];
+    return (res.data[9]);
   })
-  // CODE HERE...
+ 
+  
 
 }
 
@@ -74,6 +84,8 @@ function large() {
   return 'My name is ' + this.name + ' and I am very heavy!'
 }
 // CODE HERE...
+var boundToElephant = large.bind(elephant);
+
 
 
 
@@ -88,6 +100,10 @@ function large() {
 // and return the bound function.
 
 // CODE HERE...
+function deathStar(capacity, crew){
+return capacity.bind(crew);
+
+}
 
 
 
@@ -103,6 +119,11 @@ function large() {
 // The closure function will return the combined value of assets and liabilities.
 
 // CODE HERE...
+function accountingOffice(assets){
+  return function(liabilities){
+    return assets + liabilities;
+  };
+}
 
 
 
@@ -128,7 +149,22 @@ function large() {
 // };
 
 // CODE HERE...
+function forgetter(name){ 
+  let answer = {};
+  let arr = [];
+  const rememberall = (item) => {        
+     answer = {
+      'name': name,
+      'remember': arr
+    }
+    arr.push(item);  
+    return answer;
+  };
 
+  return rememberall;
+}
+
+forgetter(name);
 
 
 // *************
@@ -156,3 +192,53 @@ function large() {
 // NOTE: Neither hunger nor danger should be able to exceed 100 or drop below 0.
 
 // CODE HERE...
+
+function frodo(startingHungerValue, startingDangerValue){
+  let hunger = startingHungerValue;
+  let danger = startingDangerValue;
+  return {
+    dinnerOverFire: function(){
+       let newHunger = hunger -= 25;
+      let newDanger  = danger += 40;
+       let obj = { hunger: newHunger, danger: newDanger };
+      if(newHunger >= 100){
+        obj.hunger = 100;       
+      }
+      if(newDanger >= 100){
+         obj.danger = 100;
+      }
+      else if (newHunger <= 0){
+        obj.hunger = 0;
+        
+      }
+      else if (newDanger <= 0){
+        obj.danger = 0;
+      }        
+
+    
+      return obj;
+    },           
+    
+    hidingInBush: function(){ 
+      let newHunger = hunger += 35;
+      let newDanger  = danger -= 20;
+
+      let obj = { hunger: newHunger, danger: newDanger };
+       if (newHunger >= 100) {
+         obj.hunger = 100;
+       }
+       if (newDanger >= 100) {
+         obj.danger = 100;
+       } else if (newHunger <= 0) {
+         obj.hunger = 0;
+       } else if (newDanger <= 0) {
+         obj.danger = 0;
+       }       
+         
+      return obj;
+    }
+
+  }
+}
+
+frodo(55, 44);
