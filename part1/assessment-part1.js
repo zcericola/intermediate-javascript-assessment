@@ -97,10 +97,12 @@ var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear"];
 
 function Vehicle(){
   this.gasRemaining = 100;
-  this.drive = function(){
+  
+}
+
+Vehicle.prototype.drive = function(){  
      this.gasRemaining = this.gasRemaining - 25;
-     return this.gasRemaining;
-  }
+     return this.gasRemaining;  
 }
 
 let charger = new Vehicle();
